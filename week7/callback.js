@@ -139,7 +139,73 @@ emitter .emit("greet", "Temitayo");
 
 //creating a promise from Scratch  (Basic structure)
 //A promise is an object that represent:pending, Resolved(fulfilled), Rejected
+const myPromise = new
+Promise((resolve, reject) => {
 
+    //async operation here
+
+    let success = true;
+     if (success) {
+        resolve("Operation successful");
+     } else {
+        reject("Something went wrong");
+     }
+    });
+
+    //using the promise
+    myPromise
+    .then(result => {
+        console.log(result);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+
+    //converting callback to promise
+    function getUserPromise(id) {
+        return new Promise((resolve, reject) =>{
+             setTimeout(() => {
+                if(!id) {
+                    return reject("InvalidId");
+                }
+                resolve({ id: id, name: "Temitayo"});
+             }, 1000);
+        }); 
+        }
+    
+        //Promise chaining
+
+        getUserPromise(1)
+        .then(user =>{
+            console.log("User:", user);
+            return
+        getPostPromise(user.id);
+        })
+        .then(posts =>{
+            console.log("posts:", posts);
+            return
+        getCommentsPromise(posts[0].id);
+        })
+        .then (comments => {
+            console.log("Comments:", comments);
+        })
+        .catch(error=>{
+            console.log("Error:", error);
+        });
+
+        //Error Handling
+        // singe.catch() handles al errors
+        getUserPromise(1)
+        .then(user =>
+            getPostsPromise(user.id))
+            .then(post =>
+                getCommentsPromies(posts[0].id)
+            )
+            .then(comments =>
+                console.log(comments))
+                .catch(err =>
+                    console.log("Handled Error:", err));
+    
 
 
 
