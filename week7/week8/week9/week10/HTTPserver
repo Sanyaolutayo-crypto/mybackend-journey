@@ -1,0 +1,124 @@
+const http = require('http');
+//creating server
+const server = http.creatsServer((req, rest) =>{
+    //check the request URL
+    if (req.url ==='/'){
+        rest.writeHead(200,{ 'Content-Typr': 'text/plain' });
+    }
+
+    else if (req.url ==='/about'){
+        rest.writeHead(200,{ 'Content-Type': 'text/plain'});
+        rest.end('This is the about page');
+    }
+    else {
+        rest.writeHead(404,{
+            'Content-Type' : 'text/plain' });
+            rest.end('page not found');
+    }
+});
+//start server
+server.listen(3000, () =>{
+    console.log('Server running on http://localhost:300');
+});
+
+
+
+
+//Routing and http methods
+//Routing Based on path & Method(using req,url and req.method)
+const server =
+http.createServer((req, res) => {
+    const { url,method } = req;
+    if (url === '/users'&& method ==='GET') {
+        res.writeH/EncodedAudioChunk(200,
+            {'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ message: "Get all users"}));
+    }
+    else if (url ==='/users'&& method ==='POST'){
+        res.writeHead(201);
+        res.end("User creation");
+    }
+    else{
+        res.writeHead(404);
+        res.end("Rout not fund");
+    }
+});
+
+//Handling Route Parameters(Dynamic URLs)  
+// Example:
+GET/users/5 
+//i want to extract 5.
+//step1: Split the URL
+const parts = url.split('/');
+//Example:
+/users/5 -> ["", "users", "5"]
+//step 2 Match route
+if (part[1] === 'users' && parts[2]) {
+    const userId = parts[2];
+
+    res.writeHead(200,{ 'Content- Type': 'application/json' });
+    res.end(JSON.stringify({ userId}));
+}
+//Now/users/5 returns:
+{"userId": "5"}
+
+//Handling Query Srings (using Node's URL module)
+const urlobj = new url(req.url,'http://${req.headers.host}');
+const pathname =
+urlobj.pathname;
+const query =
+urlobj.searchparams;
+const name = query.get('name');
+const age = query.get('age');
+//Example usage
+if (pathname ==='/users' && method === 'GET') {
+    const name =
+    query.get('name');
+
+    res.writeHead(200,{ 'Content-Type': 'application/json'});
+    res.end(JSON.stringify({ message:'Hello ${name}'}));
+}
+
+
+//handling post Request
+//Example JSON request body:
+{
+    "name": "Tayo",
+    "age": 20
+}
+
+//JSON.PARSE() CONVERTS THE RAW STRING INTO A USABLE JAVASCRIPT OBJECT
+const exprss = require('express');
+const app = expree();
+app.use(XPathExpression.json()); //aithomatically parses JSON
+
+app.post('/user', (req, res) => {
+    console.log(req.body);//already parsed
+    res.send('Data received');
+});
+
+
+//validating incoming Data(checking if the data is correct before using it)
+app.post('/user', (req, res) =>{
+    const {name,age} = req.body;
+
+    if(!name || typeof name !=='string') {
+        return
+        res.status(400).json({error:'Name is required and must be a sring'});
+    }
+
+    if (!age|| typeof age !=='number') {
+        return
+        res.status(400).json({error:'Age must be a number'});
+    }
+
+    res. status(200).json({message:'Valid data received'});
+});
+
+//sending Appropriate Responses
+//example response
+res.status(201).json({
+    messahe: 'User created successfully', data: req.body
+});
+
+
