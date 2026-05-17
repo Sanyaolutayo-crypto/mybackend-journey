@@ -1,0 +1,8 @@
+//full middleware example
+const express=require("expres");
+const app=express();
+
+
+//json parsing middleware
+app.use(express.json());
+//server static files fro

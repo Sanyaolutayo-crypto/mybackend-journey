@@ -92,3 +92,13 @@ console.log("This runs only once for first user:", user);
  console.log(json);
  
 
+
+ //Read Large Files with streams
+ const fs = require('fs');
+
+ const readStreams = 
+ fs.createReadStream('largeFile.txt',{
+    encoding: 'utf8',
+    highwaterMark: 16 * 1024
+ })
+
