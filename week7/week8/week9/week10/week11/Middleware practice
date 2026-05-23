@@ -5,4 +5,76 @@ const app=express();
 
 //json parsing middleware
 app.use(express.json());
-//server static files fro
+
+//Jso parsing middlewarw
+app.use(express.json());
+
+//Seve static files from "public" folder
+app.use(express.static("public"));
+
+//custom logging middleware
+function logger(req,res.next)
+{
+    console.log(`${req.method}${req.url}`);
+    next();
+}
+app.use(logger);
+
+//Reques timing middleware
+function requestTimer(req,res,next){
+    const start=Date.now();
+    res.on("finish", ()=>{
+        const duration=
+        Date.now()-start; 
+            console.log(`Request 
+                took ${duration}ms`);
+            
+    });
+}
+app.use(requestTimer);
+
+//Route-Specific Authentication Middleware
+
+function authenticate(req,res,next){
+    const isLoggedIn=true;
+    if(isLoggedIn){
+        next();
+    }else{
+        res.status(401).json({
+            message:
+            "Unauthorization"
+        });
+    }
+}
+
+//Route
+
+//public route
+app.get("/", (req,res) =>{
+    res.send("Welcome to the Home page");
+});
+
+//protected route
+app.get("/dashboard",authenticate,(req,res) =>{
+    res.send("Welcome to Dashboard");
+});
+
+//Post route using JSON
+app.post("/users",(req,res)=>{
+    console.log(req.body);
+    res.json({
+        message:"Usre created",
+        data:req.body
+    });
+});
+
+//Route that throws error
+app.get("/error", (req,res,next)=>{
+    const error = new
+    Error("Something went wrong");
+    next(error);
+});
+
+//Error handling middleware
+app.use()
+

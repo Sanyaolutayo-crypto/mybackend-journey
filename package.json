@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Sanyaolutayo-crypto/mybackend-journey/issues"
   },
-  "homepage": "https://github.com/Sanyaolutayo-crypto/mybackend-journey#readme"
+  "homepage": "https://github.com/Sanyaolutayo-crypto/mybackend-journey#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
