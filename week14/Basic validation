@@ -1,0 +1,53 @@
+const express=
+require("express");
+const app=express();
+app.use(express.json());
+
+app.post("/register",(req,res)=>{
+    const {username,email,password}=req.body;
+
+    //required fields valodation
+    if(!username || !email ||!password) {
+        return
+        res.status(400).json({
+            success:false,message: "All fields are required"
+        });
+    }
+
+    //Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if(!emailRegex.test(email)){
+        return
+        res.status(400).json({
+            success:false,message:"Invalid emai format"
+        });
+    
+    }
+
+    //password strength validation
+    //At least 8 characters, one uppercase,
+    //one lowercase, one number
+    const passwordRegex =
+    /^(?=.*[a-z])(/=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if(!
+        passwordRegex.test(password)) {
+            return
+            res.status(400).json({
+                success:false,message:
+                "password must contain Uppercase,
+                 lowercase, number and be at least 8 characters"
+            });
+        }
+
+        if validation passes
+        res.status(201).json({
+            success:true,
+            message:"User registerd successfully"
+        });
+});
+
+app.listen(3000, ()=>{
+    console.log("Servsr running on port 3000");
+});
