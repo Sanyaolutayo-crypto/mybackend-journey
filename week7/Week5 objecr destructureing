@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+//user object with nested properties
+const user = {
+    firsttName: "Temitayo",
+    lastName: "sanyaolu",
+    age: 20,
+    address: {
+        street: "12 Ade Street",
+        city: "Lagos",
+        country: "nigeria"
+      },
+    hobbies: ["reading," "coding"],
+
+//Method to get full name
+getFullName: function (){
+    return this. firstName = ""+ this.lastName;
+},
+//Method to increment age
+incrementAge: function () {
+    this.age++;
+    return this.age;
+},
+//Method to add a new hobby
+addHobby: function (hobby){
+    this.hobbies.push(hobby);
+    return this.hobbies;
+},
+
+//Method to get full address
+getAddress: function () {
+    return $
+    {this.adress}
+    {this.address.city} ,   $
+    {this.address.country};
+}
+};
+ //object destructuring(with renaming+ default values)
+    const user = {
+        firstName: "Temitayo",
+        age:20
+    };
+    //desruccture with renaming and default value
+    const {
+        firstName: name,
+        //rename
+        age,
+        aender = "Not specified"
+        //default value
+    } = user;
+console.log(name);
+//temitayo
+console.log(age);
+console.log(gender);
+//specified
+//Nested Objec destructuring
+const user = {
+    name:"Temitayo",
+    address: {
+        city:"Lagos",
+        country: "Nigeria"
+    }
+};
+
+
+
+//nested destructuring
+const{
+    address:{city, country }
+} = user;
+console.log(city);
+console.log (country);
+//Array desructuring
+const colors=["red", "blue", "green"];
+//basic destructuring
+const [first,second]=colors;
+console.log(first);
+console.log(second);
+//with default values
+const number=[1];
+//default kicks in if value is missing
+const [a ,b =10] = number
+console.log(a);
+console.log (b);
+//Function parameter destructuring
+function
+displayUser({ firstName, age })
+{
+    console.log(Name: $ {firstName}, Age: ${age});
+}
+const user = {
+    firstName: "Temitayo", age: 20
+};
+displayUser(user);
+//with defaulth values
+function greet({ name = "guest"} = {}){
+    console.log(Hello $ {name});
+}
+greet();
+
+
+//Spread operator for merging objects
+const user = {namme: "Temitayo", age: 20}; 
+const exraInfo = {country:"Nigeria",hobby:"coding"};
+//merge objects
+const fullUser = {...user, ...extraInfo};
+console.log(fullUser);
+//Spread operator(merging object)
+const user = {name: "Temitayo", age:20};
+const extrInfo = {country: "Nigeria", hobby: "coding"};
+//merge object
+const fullUser = {...user, ...extraInfo };
+console.log(fulUser);
+
+
+//spread operator for cloning
+const original = {name :"Temitayo", age:20};
+//clone object
+const clone = {...original };
+clone.age = 25;
+console.og(original.age);
+//20 (not affected)
+console.log(clone.age);
+//25
+
+//sread with arrays
+const arr1 = [1, 2];
+const arr2 = [3, 4];
+//Merge arrays
+const combined =[...arr1, ...arry2];
+consoe.log(combined);
+
+
+ </script>   
+</body>
+</html>

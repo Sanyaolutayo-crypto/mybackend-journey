@@ -1,0 +1,49 @@
+const express =
+require("express");
+const {body,validationResult }=require("express-validator");
+
+const app=express();
+
+const app=express();
+
+app.use(express.json());
+
+app.post(
+    "/register",
+
+    [
+        //Trim whitespace
+        body("name").trim(),
+
+        //Normalize email
+        body("email")
+        .trim()
+        .normalizeEmail(),
+
+        //Escape dangerious characters
+        body("name").escape(),
+
+        //Sanitize age
+        body("age").toInt()
+        ],
+
+        (req,res)=>{
+            const errors =
+            validationResult(req);
+
+            if (!error.isEmty()){
+                return
+                res.status(400).json({
+                    errors:errors.array()
+                });
+            }
+            res.json({
+                message:"Data sanitized successfully",
+                data: req.body
+            });
+        }
+);
+
+app.listen(300, ()=>{
+    console.log("Server running");
+});

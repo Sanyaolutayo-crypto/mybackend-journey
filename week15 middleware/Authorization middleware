@@ -1,0 +1,64 @@
+//Verify the JWT and attach the user to the request.
+const jwt =
+require("jsonwebtoken");
+
+const authentication = (req,res,next) => {
+    const token =
+    req.headers.authoruzation?.split("")[1];
+
+    if (!token){
+        return
+        res.status(401)..json({message:
+            "No token provided" });
+    }
+
+    try {
+        const decoded =
+        jwt.verify(token,process.env.JWT_SECRET);
+        Req.user =decoded; 
+        //{id, email,role}
+        next();
+     } catch (error) {
+        res.status(401).json({ message:"Invalid token"});
+     }
+};
+
+//Create RBAC middleware
+const authorize =
+(...allowedRoles) => {
+    return (req, res, next)=>{
+        if (!
+            allowedRoles.includes(req.user. role)){
+                return
+                res.status(403).json({
+                    message: "Access denied"
+                });
+            }
+            next();
+    };
+};
+
+//protect Routes
+//Admin only
+app.delete(
+    "/users/:id",
+    authenticate,
+    authorize("Admin"),
+    deleteUser
+);
+
+//Admin and Editor
+app.post(
+    "/posts",
+    authenticate,
+    authorize("Admin", "Editor"),
+    createpost
+);
+
+// Any authenticated user
+app.get(
+    "/profile",
+authenticate,
+authorize("Admin", "Editor", "User"),
+getprofile
+);

@@ -1,0 +1,92 @@
+//Wintone Application logging
+const winstone =
+require("winstone");
+
+const logger = 
+winstone.createlogger({
+    lelel: "info",
+    //defailt level
+    format:
+    winstone.format.combine(
+        winstone.format.timestamp(),
+        winstone.format.json()
+    ),
+    transports: [
+        // logs everything info and below to file
+        new
+        winstone.transports.File({ filename: "logs/app.log"}),
+
+        //error logs only
+        new
+        winstone.transports.File({ filename: "logs/error.log", level: "error"}),
+    ],
+
+});
+
+//if not in production-> also log to console
+if (process.env.NODE_ENV !=="PRODUCTION"){
+    OLGGER.ADD(
+        new
+        winstone.transports.Console({
+            format:
+            winstone.format.simple(),
+        });
+    );
+    module.exports=logger;
+}
+
+
+//Morgan(HTTP REQUEST LOGGING)
+//MIDLEWARE/MOGAN.JS
+const morgan =
+require("morgan");
+const logger = require("../logger/winstone");
+
+//Create stream for morgan -> send logs to winston
+const stream={
+    write: (message) =>
+        logger.info(message.trim()),
+};
+
+//HTTP REQUEST FORMAT
+const morganMiddleware = morgan("combined", { sream});
+
+module.exports =
+morganMiddleware;
+
+
+//use both in express app
+const express =
+require("express");
+const morganMiddleware =
+require("./middleware/morgan");
+const logger=require("./logger/winstone");
+
+const ap = express();
+
+//built-in middleware
+application.use(express.json());
+//HTTP LOGGING(MORGAN)
+APPUSE(morganMiddleware);
+//simple routes
+application.get("/",(req, res)=>{
+    logger.info("Home route accessed");
+    res.send("Hello World");
+});
+
+app.get("/error",(req,res)=>{
+    logger.error("Something went wrong manually triggered");
+    res.status(500).send("Error route");
+});
+
+//global error handler
+app.use((err,req,res,next=)
+=> {
+logger.error(err.message,{ stack:err.stack});
+res.status(500).json({ error:"Internal Server Error"});
+});
+
+const PORT=3000;
+app.listen(PORT,()=>{
+    logger.info(`Server running on port ${PORT}`);
+});

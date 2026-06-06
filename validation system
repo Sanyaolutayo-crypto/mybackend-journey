@@ -1,0 +1,62 @@
+//Title validation
+title: {
+    notEmpty: {
+        errorMessage: "Title is required"
+    },
+    isString:{
+        errorMessage:"Title must be a string"
+    },
+    isLength:{
+        options:{min:5,max : 100},
+        errorMessage:"Title must be between 5 and 100 characters"
+     },
+   trim:true
+    }
+
+
+    //content validation
+
+    content:{
+        notEmpty:{
+            errorMessage: "Content is required"
+        },
+        isString:{
+            errorMessage: "ontent must be a string"
+        },
+        isLength:{
+            options: {min:50},
+            errorMessage:{ min:50},
+            errorMessage: "Content must be at least 50 characters long"
+        }
+    }
+
+
+    //tags Validation
+    tags: {
+        optional: true,
+        isArray:{
+            options: { max: 10 },
+            errorMessage: "Maximum of 10 tags allowed"
+        }
+    }
+
+    //Additional tag check
+    if (tags) {
+        tags.forEach(tag => {
+            if (typeof tag !=="string") {
+                throw new Error("Each tag must bea string");
+            }
+        });
+    }
+
+
+    //Category Validation
+    category:{
+        notEmpty: {
+            errorMessage: "Category is required"
+        },
+        isIn: {
+            options: [["Technology", "Sports", "Education", "Business"]],
+            errorMessage: "Invalid category"
+        }
+    }

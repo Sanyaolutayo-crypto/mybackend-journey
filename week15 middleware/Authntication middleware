@@ -1,0 +1,42 @@
+//intall JWT PACKAGE
+//creating middleware
+const jwt =
+require("jsonwebtoken");
+
+function authMiddleware(req,res,next) {
+    const token =
+    req.headers.authorization;
+
+    if (!token) {
+        return
+        res.status(401).json({
+            message:"Access denied.No token provided."
+        });
+    }
+
+    try {
+        const decoded =
+        jwt.verify(token,"your-secret-key");
+
+        //Attach user data to reqquest
+        req.user = decoded
+        next();
+     }catch (error) {
+        returnres.status(401).json({
+            message: "Invalid token."
+        });
+     }
+}
+
+module.export =
+authMiddleware;
+
+//USING MIDDLEWARE IN THE ROUTE
+const authMidleware =
+require("./authMiddleware");
+
+app.get("/profile",authMiddleware, (req, res) => {
+    res.json({
+        message: "prifile data",user: req.user
+    });
+});

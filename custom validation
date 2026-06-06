@@ -17,4 +17,29 @@ validateUniqueEmail(email){
 }
 
 //Validation age restriction
-function
+function validateAge(age) {
+    if (age< 18) {
+        return"User must be at least 18 years old";
+    }
+    return "Valid age";
+}
+//Validate phone number
+function validatePhone(phone) {
+
+//Nigeria phone number example
+const phonepattern = /
+^0\d{10}$/;
+
+if (!
+    phonepattern.test(phone)){
+        return "Invalid phone number";
+    }
+return "Valid phone number";
+}
+
+// Test validations
+console
+.log(validateUniqueEmail("Temitayo7@gmail.com"));
+console.log(validatephone("08101787487"));
+
+
