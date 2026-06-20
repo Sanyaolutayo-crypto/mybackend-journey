@@ -1,7 +1,6 @@
 // single file uuload (upload endpoints)
 const express=require("express");
 const upload=require("../multerConfig");
-
 const router =express.Router();
 
 router.post(

@@ -1,0 +1,6 @@
+// Git ignor is where we put the file u don't want to push to github
+
+node_modules.env
+.env
+
+
